@@ -20,7 +20,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">بيانات الضبط العام</h3>
+                    <h3 class="card-title" card_title_center>بيانات الضبط العام</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -86,26 +86,28 @@
                                     <td class="width30">تاريخ اخر تحديث</td>
                                     <td>
                                         @if ($data['update_by'] > 0 && $data['updated_by'] != null)
-                                        @php
-                                            $dt = new DateTime($data['updated_at']);
-                                            $date=$dt->format("Y-m-d");
-                                            $time=$dt->format("H:i");
-                                            $newDateTime=data("A", strtotime($time));
-                                            $newDateTimeType=(($newDateTimeType == "AM")?'صباحا': 'مساء');
-                                        @endphp
-                                        {{ $date }}
-                                        {{ $time }}
-                                        {{ $newDateTimeType }}
-                                        بواسطة
-                                        {{ $update_by_admin }}
+                                            @php
+                                                $dt = new DateTime($data['updated_at']);
+                                                $date = $dt->format('Y-m-d');
+                                                $time = $dt->format('H:i');
+                                                $newDateTime = data('A', strtotime($time));
+                                                $newDateTimeType = $newDateTimeType == 'AM' ? 'صباحا' : 'مساء';
+                                            @endphp
+                                            {{ $date }}
+                                            {{ $time }}
+                                            {{ $newDateTimeType }}
+                                            بواسطة
+                                            {{ $update_by_admin }}
                                         @else
                                             لا يوجد تحديث
                                         @endif
-
+                                        
 
                                     </td>
                                 </tr>
                         </table>
+                        <a class="btn btn-success"
+                                            href="{{ route('admin.adminPanelSetting.edit') }}">تعديل</a>
                     @else
                         <div class="alert alert-danger"></div>
                         عفوا لا توجد بيانات لعرضها
